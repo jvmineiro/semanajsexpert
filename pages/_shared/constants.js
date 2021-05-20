@@ -1,4 +1,4 @@
-export const constantes = {
+export const constants = {
     socketUrl: 'http://localhost',
     socketNamespaces: {
         room: 'room',
