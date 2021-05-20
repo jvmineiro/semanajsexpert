@@ -11,8 +11,9 @@ export default class SocketServer {
         const server = http.createServer((request, response) => {
             response.writeHead(200, {
                'Access-Control-Allow-Origin': '*',
-               'Access-Control-Allow-Methods': 'OPTIONS, POST, GET'
+               'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
             })
+            
             response.end('Hey there!!')
         })
 
@@ -21,6 +22,16 @@ export default class SocketServer {
                 origin: '*',
                 credentials: false
             }
+        })
+
+        const room = this.#io.of('/room')
+        room.on('connection', socket => {
+            socket.emit('userConnection', 'socket id se conectou' + socket.id)
+
+            socket.on('joinRoom', (dados) => {
+                console.log('dados recebidos', dados)
+
+            })
         })
 
         return new Promise((resolve, reject) =>{
