@@ -1,24 +1,26 @@
-import { constants } from "../../_shared/constants.js";
-import SocketBuilder from "../../_shared/socketBuilder.js";
+import { constants } from "../../_shared/constants.js"
+import RoomSocketBuilder from "./util/roomSocket.js"
 
-const socketBuilder = new SocketBuilder({
+
+const socketBuilder = new RoomSocketBuilder({
     socketUrl: constants.socketUrl,
     namespace: constants.socketNamespaces.room
 })
 
 const socket = socketBuilder
-    .setOnUserConnected(() => console.log('user connected!', user))
-    .setOnUserDisconnected(() => console.log('user disconnected', user))
+    .setOnUserConnected((user) => console.log('user connected!', user))
+    .setOnUserDisconnected((user) => console.log('user disconnected!', user))
+    .setOnRoomUpdated((room) => console.log('room list!', room))
     .build()
 
 const room = {
-    id: Date.now(),
-    topic: 'JS expert é nois'
+    id: '0001',
+    topic: 'JS Expert éh noix'
 }
 
 const user = {
-    img: 'https://cdn0.iconfinder.com/data/icons/user-pictures/100/matureman1-256.png',
-    username: 'JvMineiro'
+    img: 'https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png',
+    username: 'Erick ' + Date.now()
 }
 
-socket.emit(constants.events.JOIN_ROOM, {user, room})
+socket.emit(constants.events.JOIN_ROOM, { user, room })
