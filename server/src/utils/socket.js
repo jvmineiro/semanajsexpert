@@ -8,7 +8,13 @@ export default class SocketServer {
     }
 
     async start() {
-        const server = http.createServer()
+        const server = http.createServer((request, response) => {
+            response.writeHead(200, {
+               'Access-Control-Allow-Origin': '*',
+               'Access-Control-Allow-Methods': 'OPTIONS, POST, GET'
+            })
+            response.end('Hey there!!')
+        })
 
         this.#io = new Server(server, {
             cors: {
