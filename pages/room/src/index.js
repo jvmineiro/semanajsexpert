@@ -20,3 +20,5 @@ const user = {
     img: 'https://cdn0.iconfinder.com/data/icons/user-pictures/100/matureman1-256.png',
     username: 'JvMineiro'
 }
+
+socket.emit(constants.events.JOIN_ROOM, {user, room})
