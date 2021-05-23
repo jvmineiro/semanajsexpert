@@ -17,15 +17,10 @@ const socketBuilder = new RoomSocketBuilder({
     namespace: constants.socketNamespaces.room
 })
 
-const roomController = new RoomController({
+const dependencies = {
     socketBuilder,
-})
+    roomInfo
+}
 
-const socket = socketBuilder
-    .setOnUserConnected((user) => console.log('user connected!', user))
-    .setOnUserDisconnected((user) => console.log('user disconnected!', user))
-    .setOnRoomUpdated((room) => console.log('room list!', room))
-    .build()
+await RoomController.initialize(dependencies)
 
-
-socket.emit(constants.events.JOIN_ROOM, { user, room })
