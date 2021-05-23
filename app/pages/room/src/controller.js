@@ -12,13 +12,15 @@ export default class RoomController{
     }
     async _initialize() {
         this._setupViewEvents()
+        
         this.socket = this._setupSocket()
 
         this.socket.emit(constants.events.JOIN_ROOM, this.roomInfo)
     }
 
-    _setupViewEvnts() {
+    _setupViewEvents() {
         this.view.updateUserImage(this.roomInfo.user)
+        this.view.updateRoomTopic(this.roomInfo.room.topic)
     }
 
     _setupSocket() {
