@@ -1,6 +1,7 @@
 import { constants } from "../../_shared/constants.js"
 import RoomController from "./controller.js"
 import RoomSocketBuilder from "./util/roomSocket.js"
+import View from "./view.js"
 
 const room = {
     id: '0001',
@@ -18,9 +19,12 @@ const socketBuilder = new RoomSocketBuilder({
 })
 
 const dependencies = {
+    view: View,
     socketBuilder,
     roomInfo
 }
+
+
 
 await RoomController.initialize(dependencies)
 
